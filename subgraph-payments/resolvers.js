@@ -24,6 +24,13 @@ const resolvers = {
       }
     },
   },
+  Guest: {
+    funds: async (_, __, { dataSources, userId }) => {
+      const { amount } =
+        await dataSources.paymentsAPI.getUserWalletAmount(userId);
+      return amount;
+    },
+  },
 };
 
 module.exports = resolvers;

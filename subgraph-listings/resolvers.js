@@ -136,6 +136,12 @@ const resolvers = {
     host: ({ hostId }) => {
       return { id: hostId };
     },
+    bookings: ({ id }, _, { dataSources }) => {
+      return dataSources.bookingsDb.getBookingsForListing(id);
+    },
+    reviews: ({ id }, _, { dataSources }) => {
+      return dataSources.reviewsDb.getReviewsForListing(id);
+    },
     __resolveReference: ({ id }, { dataSources }) => {
       return dataSources.listingsAPI.getListing(id);
     },

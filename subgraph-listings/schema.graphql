@@ -73,6 +73,10 @@ type Listing @key(fields: "id") {
   host: Host! @override(from: "monolith")
   "The amenities available for this listing"
   amenities: [Amenity]! @override(from: "monolith")
+  "The list of bookings for a listing"
+  bookings: [Booking]! @override(from: "monolith")
+  "The submitted reviews for this listing"
+  reviews: [Review]! @override(from: "monolith")
   "Calculated total cost of the listing with the given arguments"
   totalCost(checkInDate: String!, checkOutDate: String!): Float!
     @override(from: "monolith")
@@ -180,4 +184,18 @@ type UpdateListingResponse implements MutationResponse {
   message: String! @override(from: "monolith")
   "The newly updated listing"
   listing: Listing @override(from: "monolith")
+}
+
+### Bookings
+
+"A booking is a reservation for a specific listing"
+type Booking @key(fields: "id") {
+  id: ID!
+}
+
+### Reviews
+
+"A review consists of a numerical rating and written text. It can be written by a host or a guest."
+type Review @key(fields: "id") {
+  id: ID!
 }

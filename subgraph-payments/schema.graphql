@@ -19,6 +19,20 @@ interface MutationResponse {
   message: String!
 }
 
+#### User accounts
+
+"Represents an Airlock user's common properties"
+interface User {
+  id: ID!
+}
+
+"A guest is a type of Airlock user. They book places to stay."
+type Guest implements User @key(fields: "id") {
+  id: ID!
+  "Amount of money in the guest's wallet"
+  funds: Float! @override(from: "monolith")
+}
+
 ### Payments
 
 type AddFundsToWalletResponse implements MutationResponse {

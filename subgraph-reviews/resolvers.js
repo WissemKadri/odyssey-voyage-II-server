@@ -70,6 +70,11 @@ const resolvers = {
       return dataSources.reviewsDb.getOverallRatingForHost(id);
     },
   },
+  Listing: {
+    overallRating: ({ id }, _, { dataSources }) => {
+      return dataSources.reviewsDb.getOverallRatingForListing(id);
+    },
+  },
   Review: {
     author: ({ authorId, targetType }) => {
       let role = "";

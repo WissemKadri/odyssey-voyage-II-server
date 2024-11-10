@@ -133,7 +133,7 @@ const resolvers = {
     },
   },
   Booking: {
-    listing: ({ listingId, ...rest }) => {
+    listing: ({ listingId }) => {
       return { id: listingId };
     },
     guest: ({ guestId }, _, { dataSources }) => {
@@ -144,6 +144,15 @@ const resolvers = {
     },
     checkOutDate: ({ checkOutDate }, _, { dataSources }) => {
       return dataSources.bookingsDb.getHumanReadableDate(checkOutDate);
+    },
+    locationReview: ({ id }, _, { dataSources }) => {
+      return dataSources.reviewsDb.getReviewForBooking("LISTING", id);
+    },
+    hostReview: ({ id }, _, { dataSources }) => {
+      return dataSources.reviewsDb.getReviewForBooking("HOST", id);
+    },
+    guestReview: ({ id, ...rest }, _, { dataSources }) => {
+      return dataSources.reviewsDb.getReviewForBooking("GUEST", id);
     },
     __resolveReference: ({ id }, { dataSources }) => {
       return dataSources.bookingsDb.getBooking(id);

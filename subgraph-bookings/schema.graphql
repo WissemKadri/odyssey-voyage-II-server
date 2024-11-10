@@ -80,6 +80,12 @@ type Booking @key(fields: "id") {
   checkOutDate: String! @override(from: "monolith")
   "The status of the booking - check BookingStatus type for all possibilities"
   status: BookingStatus! @override(from: "monolith")
+  "The guest's review of the location"
+  locationReview: Review @override(from: "monolith")
+  "The guest's review about the host"
+  hostReview: Review @override(from: "monolith")
+  "The host's review about the guest"
+  guestReview: Review @override(from: "monolith")
 }
 
 "The status of a booking"
@@ -116,4 +122,11 @@ type CreateBookingResponse implements MutationResponse {
   message: String! @override(from: "monolith")
   "The newly-created booking"
   booking: NewBookingResponse @override(from: "monolith")
+}
+
+### Reviews
+
+"A review consists of a numerical rating and written text. It can be written by a host or a guest."
+type Review @key(fields: "id") {
+  id: ID!
 }

@@ -42,6 +42,20 @@ type Host implements User @key(fields: "id") {
   overallRating: Float @override(from: "monolith")
 }
 
+"A guest is a type of Airlock user. They book places to stay."
+type Guest implements User @key(fields: "id") {
+  id: ID!
+}
+
+### Listings
+
+"A listing is a location owned by a host. A listing has a list of amenities it offers. Listings have a fixed cost per night value."
+type Listing @key(fields: "id") {
+  id: ID!
+  "The overall calculated rating for a listing"
+  overallRating: Float @override(from: "monolith")
+}
+
 ### Reviews
 
 "A review consists of a numerical rating and written text. It can be written by a host or a guest."
