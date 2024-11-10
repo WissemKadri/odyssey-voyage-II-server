@@ -1,0 +1,29 @@
+const { AuthenticationError, ForbiddenError } = require("./utils/errors");
+
+const resolvers = {
+  Mutation: {
+    addFundsToWallet: async (_, { amount }, { dataSources, userId }) => {
+      if (!userId) throw AuthenticationError();
+      try {
+        const updatedWallet = await dataSources.paymentsAPI.addFunds({
+          userId,
+          amount,
+        });
+        return {
+          code: 200,
+          success: true,
+          message: "Successfully added funds to wallet",
+          amount: updatedWallet.amount,
+        };
+      } catch (err) {
+        return {
+          code: 400,
+          success: false,
+          message: err.message,
+        };
+      }
+    },
+  },
+};
+
+module.exports = resolvers;

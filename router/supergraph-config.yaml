@@ -8,3 +8,7 @@ subgraphs:
     routing_url: http://localhost:4002
     schema:
       file: ../subgraph-accounts/schema.graphql
+  payments:
+    routing_url: http://localhost:4003
+    schema:
+      file: ../subgraph-payments/schema.graphql

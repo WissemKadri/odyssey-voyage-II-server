@@ -451,11 +451,14 @@ const resolvers = {
     },
   },
   Review: {
-    author: ({ authorId, targetType }, _, { dataSources }) => {
-      return {
-        id: authorId,
-        role: ["LISTING", "HOST"].includes(targetType) ? "Guest" : "Host",
-      };
+    author: ({ authorId, targetType }) => {
+      let role = "";
+      if (targetType === "LISTING" || targetType === "HOST") {
+        role = "Guest";
+      } else {
+        role = "Host";
+      }
+      return { __typename: role, id: authorId, role };
     },
   },
   AmenityCategory: {
