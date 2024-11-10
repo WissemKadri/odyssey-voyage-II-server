@@ -6,3 +6,8 @@ headers:
     request:
       - propagate:
           named: "Authorization"
+
+cors:
+  origins:
+    - http://localhost:3000
+    - https://studio.apollographql.com
