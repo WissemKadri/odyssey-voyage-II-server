@@ -142,6 +142,18 @@ const resolvers = {
     reviews: ({ id }, _, { dataSources }) => {
       return dataSources.reviewsDb.getReviewsForListing(id);
     },
+    totalCost: async (
+      { id },
+      { checkInDate, checkOutDate },
+      { dataSources },
+    ) => {
+      const { totalCost } = await dataSources.listingsAPI.getTotalCost({
+        id,
+        checkInDate,
+        checkOutDate,
+      });
+      return totalCost;
+    },
     __resolveReference: ({ id }, { dataSources }) => {
       return dataSources.listingsAPI.getListing(id);
     },
