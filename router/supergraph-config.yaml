@@ -16,3 +16,7 @@ subgraphs:
     routing_url: http://localhost:4004
     schema:
       file: ../subgraph-listings/schema.graphql
+  bookings:
+    routing_url: http://localhost:4005
+    schema:
+      file: ../subgraph-bookings/schema.graphql

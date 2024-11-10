@@ -140,6 +140,11 @@ const resolvers = {
       return dataSources.listingsAPI.getListing(id);
     },
   },
+  AmenityCategory: {
+    ACCOMMODATION_DETAILS: "Accommodation Details",
+    SPACE_SURVIVAL: "Space Survival",
+    OUTDOORS: "Outdoors",
+  },
 };
 
 module.exports = resolvers;
