@@ -7,6 +7,7 @@ extend schema
 type Mutation {
   ### Wallet
   addFundsToWallet(amount: Float!): AddFundsToWalletResponse!
+    @override(from: "monolith")
 }
 
 interface MutationResponse {
@@ -22,11 +23,11 @@ interface MutationResponse {
 
 type AddFundsToWalletResponse implements MutationResponse {
   "Similar to HTTP status code, represents the status of the mutation"
-  code: Int!
+  code: Int! @override(from: "monolith")
   "Indicates whether the mutation was successful"
-  success: Boolean!
+  success: Boolean! @override(from: "monolith")
   "Human-readable message for the UI"
-  message: String!
+  message: String! @override(from: "monolith")
   "Updated wallet amount"
-  amount: Float
+  amount: Float @override(from: "monolith")
 }
