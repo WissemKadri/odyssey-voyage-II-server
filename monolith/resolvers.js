@@ -381,7 +381,7 @@ const resolvers = {
     },
   },
   Listing: {
-    host: ({ hostId }, _, { dataSources }) => {
+    host: ({ hostId }) => {
       return { id: hostId };
     },
     overallRating: ({ id }, _, { dataSources }) => {
