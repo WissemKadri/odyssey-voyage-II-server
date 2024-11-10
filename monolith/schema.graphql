@@ -80,10 +80,6 @@ interface MutationResponse {
 "Represents an Airlock user's common properties"
 interface User {
   id: ID!
-  "The user's first and last name"
-  name: String!
-  "The user's profile photo URL"
-  profilePicture: String!
 }
 
 "A host is a type of Airlock user. They own listings."
