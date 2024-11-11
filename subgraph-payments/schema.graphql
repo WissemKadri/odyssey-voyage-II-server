@@ -1,13 +1,9 @@
 extend schema
-  @link(
-    url: "https://specs.apollo.dev/federation/v2.7"
-    import: ["@key", "@override"]
-  )
+  @link(url: "https://specs.apollo.dev/federation/v2.7", import: ["@key"])
 
 type Mutation {
   ### Wallet
   addFundsToWallet(amount: Float!): AddFundsToWalletResponse!
-    @override(from: "monolith")
 }
 
 interface MutationResponse {
@@ -30,18 +26,18 @@ interface User {
 type Guest implements User @key(fields: "id") {
   id: ID!
   "Amount of money in the guest's wallet"
-  funds: Float! @override(from: "monolith")
+  funds: Float!
 }
 
 ### Payments
 
 type AddFundsToWalletResponse implements MutationResponse {
   "Similar to HTTP status code, represents the status of the mutation"
-  code: Int! @override(from: "monolith")
+  code: Int!
   "Indicates whether the mutation was successful"
-  success: Boolean! @override(from: "monolith")
+  success: Boolean!
   "Human-readable message for the UI"
-  message: String! @override(from: "monolith")
+  message: String!
   "Updated wallet amount"
-  amount: Float @override(from: "monolith")
+  amount: Float
 }

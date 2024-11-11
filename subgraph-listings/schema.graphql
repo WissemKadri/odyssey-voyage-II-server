@@ -1,34 +1,31 @@
 extend schema
-  @link(
-    url: "https://specs.apollo.dev/federation/v2.7"
-    import: ["@key", "@override"]
-  )
+  @link(url: "https://specs.apollo.dev/federation/v2.7", import: ["@key"])
 
 type Query {
   ### Listings
   "A curated array of listings to feature on the homepage"
-  featuredListings: [Listing!]! @override(from: "monolith")
+  featuredListings: [Listing!]!
   "Search results for listings that fit the criteria provided"
   searchListings(criteria: SearchListingsInput): [Listing]!
-    @override(from: "monolith")
+
   "Return the listings that belong to the currently logged-in host"
-  hostListings: [Listing]! @override(from: "monolith")
+  hostListings: [Listing]!
   "Returns the details about this listing"
-  listing(id: ID!): Listing @override(from: "monolith")
+  listing(id: ID!): Listing
   "Returns all possible amenities for a listing"
-  listingAmenities: [Amenity!]! @override(from: "monolith")
+  listingAmenities: [Amenity!]!
 }
 
 type Mutation {
   ### Listings
   "Creates a new listing for the currently authenticated host"
   createListing(listing: CreateListingInput!): CreateListingResponse!
-    @override(from: "monolith")
+
   "Updates an existing listing"
   updateListing(
     listingId: ID!
     listing: UpdateListingInput!
-  ): UpdateListingResponse! @override(from: "monolith")
+  ): UpdateListingResponse!
 }
 
 interface MutationResponse {
@@ -58,37 +55,36 @@ type Host implements User @key(fields: "id") {
 type Listing @key(fields: "id") {
   id: ID!
   "The listing's title"
-  title: String! @override(from: "monolith")
+  title: String!
   "The listing's description"
-  description: String! @override(from: "monolith")
+  description: String!
   "The thumbnail image for the listing"
-  photoThumbnail: String! @override(from: "monolith")
+  photoThumbnail: String!
   "The number of beds available"
-  numOfBeds: Int! @override(from: "monolith")
+  numOfBeds: Int!
   "The cost per night"
-  costPerNight: Float! @override(from: "monolith")
+  costPerNight: Float!
   "The location type of the listing"
-  locationType: LocationType! @override(from: "monolith")
+  locationType: LocationType!
   "Owner of the listing"
-  host: Host! @override(from: "monolith")
+  host: Host!
   "The amenities available for this listing"
-  amenities: [Amenity]! @override(from: "monolith")
+  amenities: [Amenity]!
   "The list of bookings for a listing"
-  bookings: [Booking]! @override(from: "monolith")
+  bookings: [Booking]!
   "The submitted reviews for this listing"
-  reviews: [Review]! @override(from: "monolith")
+  reviews: [Review]!
   "Calculated total cost of the listing with the given arguments"
   totalCost(checkInDate: String!, checkOutDate: String!): Float!
-    @override(from: "monolith")
 }
 
 "What the location provides. An amenity should be tied to a specific category."
 type Amenity {
-  id: ID! @override(from: "monolith")
+  id: ID!
   "The category for the amenity"
-  category: AmenityCategory! @override(from: "monolith")
+  category: AmenityCategory!
   "The name of the amenity. Should be short."
-  name: String! @override(from: "monolith")
+  name: String!
 }
 
 "The category an amenity belongs to."
@@ -165,25 +161,25 @@ input UpdateListingInput {
 "Response after creating a listing"
 type CreateListingResponse implements MutationResponse {
   "Similar to HTTP status code, represents the status of the mutation"
-  code: Int! @override(from: "monolith")
+  code: Int!
   "Indicates whether the mutation was successful"
-  success: Boolean! @override(from: "monolith")
+  success: Boolean!
   "Human-readable message for the UI"
-  message: String! @override(from: "monolith")
+  message: String!
   "The newly created listing"
-  listing: Listing @override(from: "monolith")
+  listing: Listing
 }
 
 "Response after updating a listing"
 type UpdateListingResponse implements MutationResponse {
   "Similar to HTTP status code, represents the status of the mutation"
-  code: Int! @override(from: "monolith")
+  code: Int!
   "Indicates whether the mutation was successful"
-  success: Boolean! @override(from: "monolith")
+  success: Boolean!
   "Human-readable message for the UI"
-  message: String! @override(from: "monolith")
+  message: String!
   "The newly updated listing"
-  listing: Listing @override(from: "monolith")
+  listing: Listing
 }
 
 ### Bookings
